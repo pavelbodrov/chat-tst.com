@@ -13,7 +13,7 @@ class AuthClass {
 				$data_str=explode(",", $value);
 				//echo trim($data_str[0]);
 				//echo trim($data_str[1]);
-				if ($login == trim($data_str[0]) && $password == trim($data_str[1]))
+				if ($login == trim($data_str[0]) && md5($password) == trim($data_str[1]))
 				{
 					$_SESSION["is_auth"] = true;
 					$_SESSION['login'] = $login;
@@ -49,7 +49,7 @@ class AuthClass {
 		//$user_password = $_POST['pass'];
 		if (strlen($login)!=0&&strlen($password)!=0)
 		{
-			$str = $login . "," . $password . "\r\n";
+			$str = $login . "," . md5($password) . "\r\n";
 			fputs($reg_file, $str);
 			fclose($reg_file);
 			//header("Location: contact.php");
