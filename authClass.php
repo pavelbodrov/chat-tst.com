@@ -29,9 +29,9 @@ class AuthClass {
 				return false;
 			}
 	}
-	public function isLoginFree($login)
+	public function isLoginFree($login, $file_path)
 	{
-		$data = file($this->_filename);
+		$data = file($file_path);
 		foreach ($data as $value)
 		{
 			$data_str=explode(",", $value);

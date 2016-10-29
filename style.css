@@ -147,16 +147,16 @@ h1 {
 #star-form input[type=text] {
 	opacity:0.5;
 	height:10%;
-	border-radius:3px;
 	width:50%;
 	height:1.5vw;
+	font-size:0.9vw;
 }
 #star-form input[type=password] {
 	opacity:0.5;
 	height:10%;
-	border-radius:3px;
 	width:50%;
 	height:1.5vw;
+	font-size:0.9vw;
 }
 #star-form input[type=submit]{
 	margin-top:5px;
@@ -256,4 +256,9 @@ h1 {
 }
 #helper  span {
 	color:#ed9c43;
+}
+#indicator {
+	position:absolute;
+	right:15%;
+	font-size:1vw;
 }

@@ -6,7 +6,7 @@ $auth = new AuthClass();
 <html>
 	<head>
 		<link rel="stylesheet" href="style.css">
-		<script src="jquery-1.9.1.min.js"></script>
+		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/script.js"></script>
 
 	</head>

@@ -11,7 +11,7 @@ function get_msg() //получаем данные сервера
 			$("#show-list").append('<li><span class="msg_login">'+ m_obj.login + "</span>" + '<span class="msg_time">' + m_obj.time +' </span><br>'+ '<span class="msg_comment">' + m_obj.comment +'</span></li>');
 		}
 	});
-}
+};
 				
 function send_msg(send_json) //отправляем сообщения на сервер в формате JSON
 {
@@ -27,7 +27,7 @@ function send_msg(send_json) //отправляем сообщения на сервер в формате JSON
 			alert('Error!');
 		}
 	});
-}
+};
 
 function aggregate_msg(login) //главная функция отправки и загрузки сообщений
 {
@@ -52,14 +52,14 @@ function aggregate_msg(login) //главная функция отправки и загрузки сообщений
 			else alert("Don't try send empty messages, buddy!");
 		});
 	});
-}
+};
 
 function inform_user(message){ //функция вывода подсказок в форме
 	$(document).ready(function(){
 					//$("#inform_user").append("<br>Wrong password! Try again!");
-					$("#inform_user").append(message);
+				$("#inform_user").append(message);
 				});
-}
+};
 
 function showFormHint() //функция вывода подсказки при наведении на форму
 {
@@ -72,5 +72,31 @@ function showFormHint() //функция вывода подсказки при наведении на форму
 		$("#star-form").mouseleave(function(){
 			$( "#helper" ).css("min-height",0).slideUp("slow", function() {$("#helper").css("min-height",minHeight)});
 		});
+	});
+};
+function check_login(log)
+{
+	$("#indicator").text("");
+	$.ajax({
+		url: "php/check_login.php",
+		cache: false,
+		type: "POST",
+		data: 'log=' + log,
+		success: function (response) {
+			if (response=="busy")
+			{
+				$("#indicator").text("Busy");
+				$("#reg_button").attr("disabled", "disabled");
+									
+			}
+			else
+			{
+				$("#indicator").text("Free");
+				$("#reg_button").removeAttr("disabled");
+			}						
+		},
+		error: function() {
+			alert('Error!');
+		}
 	});
 }

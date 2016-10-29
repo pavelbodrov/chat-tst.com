@@ -28,7 +28,7 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/script.js"></script>
 	<?php
-	if ($auth->isLoginFree($_POST['user'])) //если логин не занят, регестрируем пользователя
+	if ($auth->isLoginFree($_POST['user'], "data/db.txt")) //если логин не занят, регестрируем пользователя
 	{
 		if($auth->reg_user($_POST['user'], $_POST['pass'])) //если функция регистрации завершилась успешно, выводим сообщение об успешной регистрации
 		{
@@ -51,7 +51,6 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 		<link rel="stylesheet" href="style.css">
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/script.js"></script>
-		
 	</head>
 		<body>
 			<div id="menu">
@@ -63,12 +62,13 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 			<div id="star-form">
 				<form method="post">
 					<label for="login" id="log-label">Login</br>
-					<input type="text" name="user" id="log"/><br />
+					<input type="text" name="user" id="log"/ onblur="check_login(this.value)"><span id="indicator"></span><br/>
 					<label for="pass" id="pass-label">Password</br>
 					<input type="password" name="pass" id="pass"/><br />
 					<input type="submit" name="auth_button" value="Sign In" title="If you already have an accaunt" />
-					<input type="submit" name="reg_button" value="Sign Up" title="Create new accaunt!"/>
+					<input id="reg_button" type="submit" name="reg_button" value="Sign Up" title="Create new accaunt!"/>
 				</form>
+				
 				<span id="inform_user"></span>
 			</div>
 			<div id="helper">
