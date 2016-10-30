@@ -73,6 +73,7 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 			</div>
 			<div id="helper">
 				Already have an accaunt? <span>Sign In!</span>
+				<br>
 				First time here? <span>Sign Up!</span>
 			</div>
 			<script>
