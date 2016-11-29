@@ -1,33 +1,21 @@
 <?php
-/*
-	$str = $_POST['c'];
+require "../authClass.php";
+$connector = new authClass();
+$db=$connector->connect_db("../chat_db.db");
 
-	//что-то делаем на сервере, преобразуем строку в верхний регистр
-	//$str = $str + ",";
-	$reg_file = fopen("msg.txt", 'a');
+	$data = $_POST['jsonMsg'];
+	$msg_obj=json_decode($data);
+	$login_id_query= $db->query("SELECT id FROM users where login = '$msg_obj->login'");
 	
-	$ara = array($str);
-	$str = json_encode($ara);
+	$result=$login_id_query->fetchArray();
+	$login_id = $result[0];
+	$query = $db->query("INSERT INTO messages (login_id, time, comment) VALUES ('$login_id', '$msg_obj->time', '$msg_obj->comment')");
 	
-	fputs($reg_file, $str);
-	fputs($reg_file, ',');
-	fclose($reg_file);
-	//отправляем обратно, помещаем строку в массив
-	//$ara = array($str);
+	//$msg_obj=json_decode($data);
+	//$reg_file = fopen("../data/msg.txt", 'a');
+	//fputs($reg_file, $msg_obj->login . $msg_obj);
+	//fputs($reg_file, "\r\n");
+	//fclose($reg_file);
 
-	//кодируем массив в строку формата JSON
-	//$str = json_encode($ara);
-
-	//возрващаем строку в формате JSON
-	echo $str;
-	*/
-
-	$data = $_POST['jsonData'];
-	$reg_file = fopen("../data/msg.txt", 'a');
-	fputs($reg_file, $data);
-	fputs($reg_file, "\r\n");
-	fclose($reg_file);
-
-	echo $data;
 
 ?>

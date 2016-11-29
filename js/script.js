@@ -5,10 +5,11 @@ function get_msg() //получаем данные сервера
 		$("#show-list").empty(); //чистим
 		for (i = 0;i<data.length;i++)
 		{
-			m_obj=data[i];
-			m_obj=m_obj.trim();
-			m_obj=JSON.parse(m_obj);
-			$("#show-list").append('<li><span class="msg_login">'+ m_obj.login + "</span>" + '<span class="msg_time">' + m_obj.time +' </span><br>'+ '<span class="msg_comment">' + m_obj.comment +'</span></li>');
+			//alert(data[i]["comment"]);
+			//m_obj=data[i];
+			//m_obj=m_obj.trim();
+			//m_obj=JSON.parse(m_obj);
+			$("#show-list").append('<li><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span></li>');
 		}
 	});
 };
@@ -19,9 +20,10 @@ function send_msg(send_json) //отправляем сообщения на сервер в формате JSON
 		url: "php/server.php",
 		cache: false,
 		type: "POST",
-		data: 'jsonData=' + send_json,
+		data: 'jsonMsg=' + send_json,
 		success: function (data) {
 			$("textarea#comment").val("");
+			//alert(send_json);
 		},
 		error: function() {
 			alert('Error!');
@@ -35,10 +37,8 @@ function aggregate_msg(login) //главная функция отправки и загрузки сообщений
 		$('#send-comment-button').click(function() {	
 			var date = new Date();							
 			var t = date.getHours() + ":" + date.getMinutes();
-			var id= date.getFullYear() + "-" +date.getMonth() + "-" +date.getDate() + "-" +date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
 			var comment = document.getElementById("comment").value;
 			var msg_obj = { //объект сообщения
-				"id":id,
 				"login":login,
 				"time":t,
 				"comment":comment

@@ -1,19 +1,26 @@
 <?php
+
 class AuthClass {
 	
 	private $_filename = "data/db.txt";
+	private $_dbPath =  "chat_db.db";
+	public function connect_db($path)
+	{
+			$db = new SQLite3($path);
+			return $db;
+	}
 	
 	public function authentification($login, $password)
 	{
-		$data = file($this->_filename);
+		$db = $this->connect_db($this->_dbPath);
+		$query = $db->query("SELECT id FROM users WHERE login = '$login' AND password = '$password'");
+		$result = $query->fetchArray();
 		if (strlen($login)!=0&&strlen($password)!=0)
 		{
-			foreach ($data as $value)
-			{
-				$data_str=explode(",", $value);
+			
 				//echo trim($data_str[0]);
 				//echo trim($data_str[1]);
-				if ($login == trim($data_str[0]) && md5($password) == trim($data_str[1]))
+				if (!empty($result))
 				{
 					$_SESSION["is_auth"] = true;
 					$_SESSION['login'] = $login;
@@ -22,39 +29,39 @@ class AuthClass {
 					exit;
 					return true;
 				}
-			}
 		}
 			if (!$_SESSION["is_auth"]) //проверка правильности
 			{
 				return false;
 			}
 	}
-	public function isLoginFree($login, $file_path)
+	public function isLoginFree($login, $path)
 	{
-		$data = file($file_path);
-		foreach ($data as $value)
-		{
-			$data_str=explode(",", $value);
-			if ($login == trim($data_str[0]))
+		
+			$db = $this->connect_db($path);
+			$query = $db->query("SELECT id FROM users WHERE login = '$login'");
+			$result = $query->fetchArray();
+			if (empty($result))
 			{
-				return false; //возвращаем код ошибки, чтобы отловить и оповестить пользователя (Логин занят)
+				return true;
 			}
-		}
-		return true;
+			else
+			{
+				return false;
+			}		
+			
 	}
 	public function reg_user($login, $password)
 	{
+		
 		$reg_file = fopen($this->_filename, 'a');
 		//$user_login = $_POST['user'];
 		//$user_password = $_POST['pass'];
 		if (strlen($login)!=0&&strlen($password)!=0)
-		{
-			$str = $login . "," . md5($password) . "\r\n";
-			fputs($reg_file, $str);
-			fclose($reg_file);
-			//header("Location: contact.php");
-			//echo "asd";
-			//echo '<span id="new_accaunt_greet">New accaunt has been succsessfully made!</span>';
+		{	
+			//$db = $this->connect_db("chat_db.db");
+			$db=$this->connect_db("chat_db.db");
+			$db->query("INSERT INTO users (login,password) VALUES ('$login', '$password')");
 			return true;
 		}
 		else

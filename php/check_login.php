@@ -2,7 +2,7 @@
 require("../authClass.php");
 $auth = new authClass();
 	$login = $_POST['log'];
-	if ($auth->isLoginFree($login, "../data/db.txt"))
+	if ($auth->isLoginFree($login, "../chat_db.db"))
 	{
 		echo "free";
 	}

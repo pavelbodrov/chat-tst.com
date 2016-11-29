@@ -28,7 +28,7 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/script.js"></script>
 	<?php
-	if ($auth->isLoginFree($_POST['user'], "data/db.txt")) //если логин не занят, регестрируем пользователя
+	if ($auth->isLoginFree($_POST['user'], "chat_db.db")) //если логин не занят, регестрируем пользователя
 	{
 		if($auth->reg_user($_POST['user'], $_POST['pass'])) //если функция регистрации завершилась успешно, выводим сообщение об успешной регистрации
 		{
