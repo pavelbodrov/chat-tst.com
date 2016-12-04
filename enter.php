@@ -48,7 +48,7 @@ if(isset($_POST['reg_button'])) //если нажата кнопка регистрации
 ?>
 <html>
 	<head>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="mediaStyle.css">
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/script.js"></script>
 	</head>

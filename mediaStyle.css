@@ -61,27 +61,13 @@ h1 {
 	font-size:1.8v;
 }
 #show-msg {
-	width:100%;
+	width:30%;
 	height:82.5%;
 	overflow-y:scroll;
 	overflow-x:hidden;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar {
-    width: 12px;
-}
-
- 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-}
- 
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
 
 .msg_login {
 	color:#154356;
