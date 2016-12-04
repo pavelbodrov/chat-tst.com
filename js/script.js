@@ -1,6 +1,6 @@
 function get_msg() //получаем данные сервера
 {
-	$.getJSON('php/load_msg.php', function(data) {
+	var get_data = $.getJSON('php/load_msg.php', function(data) {
 		var m_obj;
 		$("#show-list").empty(); //чистим
 		for (i = 0;i<data.length;i++)
@@ -11,6 +11,11 @@ function get_msg() //получаем данные сервера
 			//m_obj=JSON.parse(m_obj);
 			$("#show-list").append('<li><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span></li>');
 		}
+	});
+	get_data.promise().done(function(){
+		var objDiv = document.getElementById("show-msg");
+			objDiv.scrollTop = objDiv.scrollHeight;
+			//alert(objDiv.scrollHeight);			
 	});
 };
 				

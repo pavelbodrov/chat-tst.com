@@ -35,7 +35,11 @@ $auth = new AuthClass();
 		<script>
 			var login = "<?php echo $auth->getLogin() ?>";				
 			setInterval(function(){ get_msg() }, 200); //обновляем сообщения каждую секунду
+			//get_msg();
 			aggregate_msg(login);
+			//var objDiv = document.getElementById("show-msg");
+			//objDiv.scrollTop = objDiv.scrollHeight;
+			//alert(objDiv.scrollHeight);
 		</script>
 		
 	</body>
