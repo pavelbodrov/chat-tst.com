@@ -3,14 +3,18 @@ function get_msg() //получаем данные сервера
 	var get_data = $.getJSON('php/load_msg.php', function(data) {
 		var m_obj;
 		$("#show-list").empty(); //чистим
-		for (i = 0;i<data.length;i++)
+		if (data!=null)
 		{
-			//alert(data[i]["comment"]);
-			//m_obj=data[i];
-			//m_obj=m_obj.trim();
-			//m_obj=JSON.parse(m_obj);
-			$("#show-list").append('<li><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span></li>');
+			for (i = 0;i<data.length;i++)
+			{
+				//alert(data[i]["comment"]);
+				//m_obj=data[i];
+				//m_obj=m_obj.trim();
+				//m_obj=JSON.parse(m_obj);
+				$("#show-list").append('<li id="msgList"><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span><span class="msg_id" style="opacity:0">' + data[i]["id"] + '</span></li>');
+			}
 		}
+		//alert("get bitch");
 	});
 	get_data.promise().done(function(){
 		var objDiv = document.getElementById("show-msg");
@@ -28,13 +32,55 @@ function send_msg(send_json) //отправляем сообщения на сервер в формате JSON
 		data: 'jsonMsg=' + send_json,
 		success: function (data) {
 			$("textarea#comment").val("");
-			//alert(send_json);
+			//alert(data);
+			/*
+			$.ajax({
+				url: "php/listener.php",
+				cache: false,
+				type: "POST",
+				data: 'signal=' + "refresh",
+				success: function (data) {
+					//$("textarea#comment").val("");
+					//alert(data);
+				},
+				error: function() {
+					alert('Error!');
+				}
+			});
+			*/
 		},
 		error: function() {
 			alert('Error!');
 		}
 	});
+	
 };
+function changeChecker(id) //takes last message' ID from the cliend page and checks whether new messages have been added. If there are new messages on the server it calls get_msg() function
+{
+	
+	$.ajax({
+		url: "php/listener.php",
+		cache: false,
+		type: "POST",
+		data: 'lastMsg=' + id,
+		success: function (data) {
+			if (data=="refresh")
+			{
+				get_msg();
+			}
+		},
+		error: function() {
+			alert('Error!');
+		}
+	});
+}
+function getLastMsg() //get last(current) message ID from the page and pass it as a parameter to function changeCecker
+{
+	var lastMessageId = parseInt($('.msg_id').last().text());
+	changeChecker(lastMessageId);
+		
+	//});
+}
 
 function aggregate_msg(login) //главная функция отправки и загрузки сообщений
 {
@@ -52,7 +98,7 @@ function aggregate_msg(login) //главная функция отправки и загрузки сообщений
 			if (comment.length!=0)
 			{
 				send_msg(send_json); //отправляем JSON сообщения на сервер							
-				get_msg(); //получаем JSON сообщения с сервера										
+				//get_msg(); //получаем JSON сообщения с сервера										
 			}
 			else alert("Don't try send empty messages, buddy!");
 		});

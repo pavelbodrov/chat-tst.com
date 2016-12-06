@@ -2,6 +2,14 @@
 require "php/auth.php";
 require "authClass.php";
 $auth = new AuthClass();
+function getId()
+{
+	$connector = new authClass();
+	$db=$connector->connect_db("chat_db.db");
+	$query = $db->query("SELECT MAX(id) FROM messages");
+	$row = $query->fetchArray();
+	return $row[0];
+}
 ?>
 <html>
 	<head>
@@ -34,12 +42,9 @@ $auth = new AuthClass();
 		
 		<script>
 			var login = "<?php echo $auth->getLogin() ?>";				
-			setInterval(function(){ get_msg() }, 200); //обновляем сообщения каждую секунду
-			//get_msg();
+			get_msg();
 			aggregate_msg(login);
-			//var objDiv = document.getElementById("show-msg");
-			//objDiv.scrollTop = objDiv.scrollHeight;
-			//alert(objDiv.scrollHeight);
+			setInterval(function(){ getLastMsg() }, 2000);
 		</script>
 		
 	</body>

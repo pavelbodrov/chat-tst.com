@@ -13,7 +13,7 @@ $db=$connector->connect_db("../chat_db.db");
 
 $msg;
 	$i=0;
-	$query = $db->query("SELECT (SELECT login FROM users WHERE users.id = messages.login_id) as login, time, comment FROM messages");
+	$query = $db->query("SELECT (SELECT login FROM users WHERE users.id = messages.login_id) as login, time, comment, id FROM messages");
 	while ($row = $query->fetchArray()) {
 		//echo $row;
 		$msg[$i]=$row;
