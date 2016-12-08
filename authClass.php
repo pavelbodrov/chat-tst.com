@@ -13,6 +13,8 @@ class AuthClass {
 	public function authentification($login, $password)
 	{
 		$db = $this->connect_db($this->_dbPath);
+		$login = $db->escapeString($login);
+		$password = $db->escapeString($password);
 		$query = $db->query("SELECT id FROM users WHERE login = '$login' AND password = '$password'");
 		$result = $query->fetchArray();
 		if (strlen($login)!=0&&strlen($password)!=0)
@@ -39,6 +41,7 @@ class AuthClass {
 	{
 		
 			$db = $this->connect_db($path);
+			$login = $db->escapeString($login);
 			$query = $db->query("SELECT id FROM users WHERE login = '$login'");
 			$result = $query->fetchArray();
 			if (empty($result))
@@ -61,6 +64,8 @@ class AuthClass {
 		{	
 			//$db = $this->connect_db("chat_db.db");
 			$db=$this->connect_db("chat_db.db");
+			$login = $db->escapeString($login);
+			$password = $db->escapeString($password);
 			$db->query("INSERT INTO users (login,password) VALUES ('$login', '$password')");
 			return true;
 		}

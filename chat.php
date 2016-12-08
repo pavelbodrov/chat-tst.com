@@ -44,7 +44,7 @@ function getId()
 			var login = "<?php echo $auth->getLogin() ?>";				
 			get_msg();
 			aggregate_msg(login);
-			setInterval(function(){ getLastMsg() }, 2000);
+			setInterval(function(){ getLastMsg() }, 500);
 		</script>
 		
 	</body>
