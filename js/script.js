@@ -11,7 +11,7 @@ function get_msg() //получаем данные сервера
 				//m_obj=data[i];
 				//m_obj=m_obj.trim();
 				//m_obj=JSON.parse(m_obj);
-				$("#show-list").append('<li id="msgList"><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span><span class="msg_id" style="opacity:0">' + data[i]["id"] + '</span></li>');
+				$("#show-list").append('<li id="msgList"><span class="msg_login">'+ data[i]["login"] + "</span>" + '<span class="msg_time">' + data[i]["time"] +' </span><br>'+ '<span class="msg_comment">' + data[i]["comment"] +'</span><span class="msg_id" style="display:none">' + data[i]["id"] + '</span></li>');
 			}
 		}
 		//alert("get bitch");
@@ -74,7 +74,7 @@ function changeChecker(id) //takes last message' ID from the cliend page and che
 		}
 	});
 }
-function getLastMsg() //get last(current) message ID from the page and pass it as a parameter to function changeCecker
+function getLastMsg() //get last(current) message ID from the page and pass it as a parameter to changeCecker function
 {
 	var lastMessageId = parseInt($('.msg_id').last().text());
 	changeChecker(lastMessageId);
