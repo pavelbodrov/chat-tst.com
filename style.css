@@ -61,7 +61,9 @@ h1 {
 	overflow-x:hidden;
     border-radius: 10px;
 }
-
+.created {
+	font-size:1vw;
+}
 ::-webkit-scrollbar {
     width: 12px;
 }

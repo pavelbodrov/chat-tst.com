@@ -1,7 +1,8 @@
 <?php
 require "php/auth.php";
 if($_SESSION['login']){
-	echo "<script>alert(\"It seems you have already signed in!\");</script>";
+	header("Location: chat.php");
+	exit;
 }
 ?>
 <head>

@@ -2,14 +2,6 @@
 require "php/auth.php";
 require "authClass.php";
 $auth = new AuthClass();
-function getId()
-{
-	$connector = new authClass();
-	$db=$connector->connect_db("chat_db.db");
-	$query = $db->query("SELECT MAX(id) FROM messages");
-	$row = $query->fetchArray();
-	return $row[0];
-}
 ?>
 <html>
 	<head>

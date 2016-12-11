@@ -1,2 +1,0 @@
-﻿{"id":"2016-10-29-10-45-25","login":"admin","time":"10:45","comment":"hello all"}
-admin
